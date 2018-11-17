@@ -2,8 +2,10 @@ public class Member {
 
     PImage fondo;
     Table data;
+    PShape g;
     PFont consolas;
     PFont gabriola;
+    PFont cambria;
     PFont book;
     PFont bookBold;
     int y;
@@ -13,8 +15,10 @@ public class Member {
     public Member (String name) {
         fondo = loadImage("/Graphic/"+ name +".png");
         data = loadTable("/data.csv");
-        consolas = createFont("Consolas", 10, true);
+        g = createShape();
+        consolas = createFont("Consolas Bold", 12, true);
         gabriola = createFont("Gabriola", 20, true);
+        cambria = createFont("Cambria Italic", 15, true);
         book = createFont("Book Antiqua", 30, true);
         bookBold = createFont("Book Antiqua Bold", 35, true);
         alto = 1560 - 54;
@@ -76,6 +80,9 @@ public class Member {
             textFont(book);
             text(texto, X(590), Y(725));
             text(multimedia, X(590), Y(840));
+        // Gráficas
+            graph(graph);
+            //pie();
     }
 
     private int X (int x) {
@@ -86,8 +93,60 @@ public class Member {
         return height*y/this.alto;
     }
 
+    private void graph (int[] graph) {
+        // Dibuja la gráfica mensual
+        limit(graph);
+        mean(graph);
+        g.beginShape();
+        g.stroke(200, 0, 0);
+        g.noFill();
+        int count = 0;
+        for (int i = 0; i < graph.length; i++) {
+            g.vertex(X(count), Y(graph[i]));
+            count -= 32;
+        }
+        g.endShape();
+        pushMatrix();
+            rotate(PI);
+            shape(g, X(-520), Y(-534));
+        popMatrix();
+    }
+
+    private void limit(int[] graph) {
+        int max = graph[0];
+        int min = max;
+        for (int i = 0; i < graph.length; i++) {
+            if (graph[i] > max)
+                max = graph[i];
+            if (graph[i] < min)
+                min = graph[i];
+        }
+        textAlign(CENTER);
+        textFont(consolas);
+        text(max, X(480), Y(430));
+        text(min, X(480), Y(553));
+    }
+
+    private void mean(int[] graph) {
+        int ac = 0;
+        for (int i = 0; i < graph.length; i++) {
+            ac += graph[i];
+        }
+        int m = ac/graph.length;
+        pushStyle();
+            textFont(cambria);
+            textAlign(CENTER);
+            fill(200);
+            text("Media: " + m, X(680), Y(565));
+        popStyle();
+    }
+
     private void drawActividad(int diasActivo, int spamsDebates, int ratioFluidez) {
-        // Dibuja la Sección de Actividad
+        textAlign(CENTER);
+        textFont(bookBold, 50);
+        text(diasActivo, X(250), Y(1215));
+        text(spamsDebates, X(540), Y(1215));
+        text(ratioFluidez, X(830), Y(1215));
     }
 
 
