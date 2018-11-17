@@ -8,9 +8,10 @@ public class Member {
     PFont cambria;
     PFont book;
     PFont bookBold;
-    int y;
     int alto;
     int ancho;
+    color c;
+    int y;
 
     public Member (String name) {
         fondo = loadImage("/Graphic/"+ name +".png");
@@ -24,16 +25,26 @@ public class Member {
         alto = 1560 - 54;
         ancho = 1080;
         fill(0);
-        if(name == "Admin")
+        if(name == "Admin"){
+            c = color(200, 0, 0);
             y = 0;
-        if(name == "Senpai")
+        }
+        if(name == "Senpai"){
+            c = color(0, 200, 100);
             y = 4;
-        if(name == "Tejón")
+        }
+        if(name == "Tejón"){
+            c = color(100, 0, 100);
             y = 8;
-        if(name == "Sergäy")
+        }
+        if(name == "Sergäy"){
+            c = color(0, 100, 255);
             y = 12;
-        if(name == "Niggo")
+        }
+        if(name == "Niggo"){
+            c = color(255, 150, 0);
             y = 16;
+        }
     }
 
     public void stats () {
@@ -99,10 +110,10 @@ public class Member {
         limit(max, min);
         mean(graph);
         g.beginShape();
-            g.stroke(200, 0, 0);
+            g.stroke(c);
             g.noFill();
             int count = 0;
-            int[] graphAjustada = ajustar(graph, max, min);
+            int[] graphAjustada = ajustar(graph, min);
             for (int i = 0; i < graph.length; i++) {
                 g.vertex(X(count), Y(graphAjustada[i]));
                 count -= 32;
@@ -132,7 +143,7 @@ public class Member {
         return x;
     }
 
-    private int[] ajustar (int[] graph, int max, int min) {
+    private int[] ajustar (int[] graph, int min) {
         int[] graphAjustada = new int[12];
         // Reducirle el Mínimo valor a todo el Arreglo:
             for (int i = 0; i < graph.length; i++) {
@@ -169,7 +180,7 @@ public class Member {
 
     private void pie (float t) {
         pushStyle();
-            fill(200, 0, 0, 150);
+            fill(c, 150);
             noStroke();
             float tRadial = (t*360)/100;
             arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
