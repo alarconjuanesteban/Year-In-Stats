@@ -94,17 +94,19 @@ public class Member {
     }
 
     private void graph (int[] graph) {
-        // Dibuja la gráfica mensual
-        limit(graph);
+        int max = max(graph);
+        int min = min(graph);
+        limit(max, min);
         mean(graph);
         g.beginShape();
-        g.stroke(200, 0, 0);
-        g.noFill();
-        int count = 0;
-        for (int i = 0; i < graph.length; i++) {
-            g.vertex(X(count), Y(graph[i]));
-            count -= 32;
-        }
+            g.stroke(200, 0, 0);
+            g.noFill();
+            int count = 0;
+            int[] graphAjustada = ajustar(graph, max, min);
+            for (int i = 0; i < graph.length; i++) {
+                g.vertex(X(count), Y(graphAjustada[i]));
+                count -= 32;
+            }
         g.endShape();
         pushMatrix();
             rotate(PI);
@@ -112,15 +114,39 @@ public class Member {
         popMatrix();
     }
 
-    private void limit(int[] graph) {
-        int max = graph[0];
-        int min = max;
-        for (int i = 0; i < graph.length; i++) {
-            if (graph[i] > max)
-                max = graph[i];
-            if (graph[i] < min)
-                min = graph[i];
+    private int max (int[] arr) {
+        int x = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > x)
+                x = arr[i];
         }
+        return x;
+    }
+
+    private int min (int[] arr) {
+        int x = arr[0];
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] < x)
+                x = arr[i];
+        }
+        return x;
+    }
+
+    private int[] ajustar (int[] graph, int max, int min) {
+        int[] graphAjustada = new int[12];
+        // Reducirle el Mínimo valor a todo el Arreglo:
+            for (int i = 0; i < graph.length; i++) {
+                graphAjustada[i] = graph[i] - min;
+            }
+        // Ajuste Porcentual:
+            int maxTemp = max(graphAjustada);
+            for (int i = 0; i < graphAjustada.length; i++) {
+                graphAjustada[i] = (graphAjustada[i]*100)/maxTemp;
+            }
+        return graphAjustada;
+    }
+
+    private void limit(int max, int min) {
         textAlign(CENTER);
         textFont(consolas);
         text(max, X(480), Y(430));
