@@ -53,12 +53,12 @@ public class Member {
             int diasActivo = data.getInt(y+2,0);
             int spamsDebates = data.getInt(y+2,1);
             int ratioFluidez = data.getInt(y+2,2);
-        stats(menTotales, graph, texto, multimedia, menDiarios, diasActivo, spamsDebates, ratioFluidez);
+        stats(menTotales, graph, t, texto, multimedia, menDiarios, diasActivo, spamsDebates, ratioFluidez);
     }
 
-    private void stats(String menTotales, int[] graph, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
+    private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
         drawFondo();
-        drawMensajes(menTotales, graph, texto, multimedia, menDiarios);
+        drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
         drawActividad(diasActivo, spamsDebates, ratioFluidez);
     }
 
@@ -68,7 +68,7 @@ public class Member {
         image(fondo,0,0);
     }
 
-    private void drawMensajes(String menTotales, int[] graph, String texto, String multimedia, int menDiarios) {
+    private void drawMensajes(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios) {
         // Mensajes Totales + Diarios En Promedio
             textAlign(CENTER);
             textFont(bookBold);
@@ -82,7 +82,7 @@ public class Member {
             text(multimedia, X(590), Y(840));
         // Gráficas
             graph(graph);
-            //pie();
+            pie(t);
     }
 
     private int X (int x) {
@@ -164,6 +164,15 @@ public class Member {
             textAlign(CENTER);
             fill(200);
             text("Media: " + m, X(680), Y(565));
+        popStyle();
+    }
+
+    private void pie (float t) {
+        pushStyle();
+            fill(200, 0, 0, 150);
+            noStroke();
+            float tRadial = (t*360)/100;
+            arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
         popStyle();
     }
 
