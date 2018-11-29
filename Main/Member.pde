@@ -1,6 +1,7 @@
 public class Member {
 
     PImage fondo;
+    PImage plantilla;
     Table data;
     PShape g;
     PFont consolas;
@@ -14,7 +15,8 @@ public class Member {
     int y;
 
     public Member (String name) {
-        fondo = loadImage("/Graphic/"+ name +".png");
+        fondo = loadImage("/Graphic/Fondo.png");
+        plantilla = loadImage("/Graphic/"+ name +".png");
         data = loadTable("/data.csv");
         g = createShape();
         consolas = createFont("Consolas Bold", 12, true);
@@ -23,27 +25,27 @@ public class Member {
         book = createFont("Book Antiqua", 30, true);
         bookBold = createFont("Book Antiqua Bold", 35, true);
         alto = 1560 - 54;
-        ancho = 1080;
+        ancho = 2773;
         fill(0);
         if(name == "Admin"){
             c = color(200, 0, 0);
-            y = 0;
+            y = 1;
         }
         if(name == "Senpai"){
             c = color(0, 200, 100);
-            y = 4;
+            y = 5;
         }
         if(name == "Tejón"){
             c = color(100, 0, 100);
-            y = 8;
+            y = 9;
         }
         if(name == "Sergäy"){
             c = color(0, 100, 255);
-            y = 12;
+            y = 13;
         }
         if(name == "Niggo"){
             c = color(255, 150, 0);
-            y = 16;
+            y = 17;
         }
     }
 
@@ -69,14 +71,24 @@ public class Member {
 
     private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
         drawFondo();
+        drawPlantilla();
         drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
         drawActividad(diasActivo, spamsDebates, ratioFluidez);
     }
 
     private void drawFondo() {
-        //fondo.resize(648,936);
-        fondo.resize(540,780);
-        image(fondo,0,0);
+        pushMatrix();
+            translate(-(width-(height*1080/1560))/2,0);
+            fondo.resize(width,height);
+            image(fondo,0,0);
+        popMatrix();
+    }
+
+    private void drawPlantilla() {
+        //plantilla.resize(648,936);
+        //plantilla.resize(540,780);
+        plantilla.resize(height*1080/1560,height);
+        image(plantilla,0,0);
     }
 
     private void drawMensajes(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios) {
@@ -183,7 +195,9 @@ public class Member {
             fill(c, 150);
             noStroke();
             float tRadial = (t*360)/100;
-            arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
+            int radio = width*9/100;
+            arc(X(290), Y(745), radio, radio, 0, radians(tRadial));
+            //arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
         popStyle();
     }
 
@@ -193,6 +207,10 @@ public class Member {
         text(diasActivo, X(250), Y(1215));
         text(spamsDebates, X(540), Y(1215));
         text(ratioFluidez, X(830), Y(1215));
+    }
+
+    public int getX(int i){
+        return data.getInt(y+1,i);
     }
 
 
