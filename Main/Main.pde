@@ -7,48 +7,54 @@ Member niggo;
 void setup(){
     // Configuración del Sketch
         fullScreen();
-        translate((width-(height*1080/1560))/2,0);
-        /*size = 3;
-        switch (size){
-            case 1:
-                xSketch = 432;
-                ySketch = 624;
-            break;
-            case 2:
-                xSketch = 540;
-                ySketch = 780;
-            break;
-            case 3:
-                xSketch = 648;
-                ySketch = 936;
-            break;
-        }
-        size(xSketch, ySketch);*/
+        shapeMode(CORNER);
+        noStroke();
+        loop();
     // Inicialización de Objetos (Miembros)
         admin = new Member("Admin");
-        //senpai = new Member("Senpai");
+        senpai = new Member("Senpai");
         tejon = new Member("Tejón");
-        //sergay = new Member("Sergäy");
-        //niggo = new Member("Niggo");
+        sergay = new Member("Sergäy");
+        niggo = new Member("Niggo");
     // Proyección de Estadísticas
-        admin.stats();
+        //admin.stats();
         //senpai.stats();
         //tejon.stats();
         //sergay.stats();
-        //niggo.stats();
-    // Configuraciones Posteriores
-        shapeMode(CENTER);
-        fill(0);
+        niggo.stats();
 }
 
 void draw(){
-    // Inicialización de los Overlays
-        /*rect(100,100,100,100);
-        int[] menMes = new int[12];
-        for (int i = 0; i < 12 ; i++) {
-            menMes[i] = admin.getX(i);
-        }
-        if(Overlay.mouseOver(menMes[0])){
-            // asd
+    //update(mouseX, mouseY);
+    // Selector de Miembro
+        /*for (int i = 0; i < 5; i++) {
+            fill(i*20);
+            rect(width*i/5,0,width/5,height);
         }*/
+        /*fill(200,0,0);
+        select();*/
+    // Inicialización de los Overlay
+        //rect(1400,410,300,300);
+}
+
+private void select() {
+    highlight();
+}
+
+private void highlight() {
+    if (mouseX > 0 && mouseX < width/5){
+        rect(0,0,width/5,height);
+    }else
+    if (mouseX > width/5 && mouseX < width*2/5){
+        rect(width/5,0,width/5,height);
+    }else
+    if (mouseX > width*2/5 && mouseX < width*3/5){
+        rect(width*2/5,0,width/5,height);
+    }else
+    if (mouseX > width*3/5 && mouseX < width*4/5){
+        rect(width*3/5,0,width/5,height);
+    }else
+    if (mouseX > width*4/5 && mouseX < width){
+        rect(width*4/5,0,width/5,height);
+    }
 }

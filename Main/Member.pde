@@ -22,8 +22,8 @@ public class Member {
         consolas = createFont("Consolas Bold", 12, true);
         gabriola = createFont("Gabriola", 20, true);
         cambria = createFont("Cambria Italic", 15, true);
-        book = createFont("Book Antiqua", 30, true);
-        bookBold = createFont("Book Antiqua Bold", 35, true);
+        book = createFont("Book Antiqua", 35, true);
+        bookBold = createFont("Book Antiqua Bold", 50, true);
         alto = 1560 - 54;
         ancho = 2773;
         fill(0);
@@ -71,17 +71,17 @@ public class Member {
 
     private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
         drawFondo();
-        drawPlantilla();
-        drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
-        drawActividad(diasActivo, spamsDebates, ratioFluidez);
+        pushMatrix();
+            translate((width-(height*1080/1560))/2,0);
+            drawPlantilla();
+            drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
+            drawActividad(diasActivo, spamsDebates, ratioFluidez);
+        popMatrix();
     }
 
     private void drawFondo() {
-        pushMatrix();
-            translate(-(width-(height*1080/1560))/2,0);
             fondo.resize(width,height);
             image(fondo,0,0);
-        popMatrix();
     }
 
     private void drawPlantilla() {
@@ -123,6 +123,7 @@ public class Member {
         mean(graph);
         g.beginShape();
             g.stroke(c);
+            g.strokeWeight(2);
             g.noFill();
             int count = 0;
             int[] graphAjustada = ajustar(graph, min);
@@ -195,7 +196,7 @@ public class Member {
             fill(c, 150);
             noStroke();
             float tRadial = (t*360)/100;
-            int radio = width*9/100;
+            float radio = width*9.1/100;
             arc(X(290), Y(745), radio, radio, 0, radians(tRadial));
             //arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
         popStyle();
