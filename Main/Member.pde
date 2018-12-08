@@ -1,6 +1,5 @@
 public class Member {
 
-    PImage fondo;
     PImage plantilla;
     Table data;
     PShape g;
@@ -15,7 +14,6 @@ public class Member {
     int y;
 
     public Member (String name) {
-        fondo = loadImage("/Graphic/Fondo.png");
         plantilla = loadImage("/Graphic/"+ name +".png");
         data = loadTable("/data.csv");
         g = createShape();
@@ -70,18 +68,12 @@ public class Member {
     }
 
     private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
-        drawFondo();
         pushMatrix();
             translate((width-(height*1080/1560))/2,0);
             drawPlantilla();
             drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
             drawActividad(diasActivo, spamsDebates, ratioFluidez);
         popMatrix();
-    }
-
-    private void drawFondo() {
-            fondo.resize(width,height);
-            image(fondo,0,0);
     }
 
     private void drawPlantilla() {
