@@ -2,6 +2,7 @@ public class Member {
 
     PImage plantilla;
     Table data;
+    int[] graph;
     PShape g;
     PFont consolas;
     PFont gabriola;
@@ -16,6 +17,7 @@ public class Member {
     public Member (String name) {
         plantilla = loadImage("/Graphic/"+ name +".png");
         data = loadTable("/data.csv");
+        graph = new int[12];
         g = createShape();
         consolas = createFont("Consolas Bold", 12, true);
         gabriola = createFont("Gabriola", 20, true);
@@ -45,16 +47,25 @@ public class Member {
             c = color(255, 150, 0);
             y = 17;
         }
+        if(name == "WoL!"){
+            c = color(0, 0, 0);
+            y = 21;
+        }
+    }
+
+    public void graphArray() {
+        for (int i = 0; i < 12 ; i++)
+            graph[i] = data.getInt(y+1,i);
     }
 
     public void stats () {
         // Datos de Mensajes
             int mT = data.getInt(y,0);
             String menTotales = nfc(mT);
-            int[] graph = new int[12];
+            /*int[] graph = new int[12];
             for (int i = 0; i < 12 ; i++) {
                 graph[i] = data.getInt(y+1,i);
-            }
+            }*/
             float t = data.getFloat(y,1);
             float m = 100-t;
             String texto = nfc(t,2);
@@ -123,6 +134,14 @@ public class Member {
                 g.vertex(X(count), Y(graphAjustada[i]));
                 count -= 32;
             }
+            /*for (int i = 0; i < graph.length; i++) {
+                g.vertex(X(count), Y(graphAjustada[graph.length-i]));
+                count += 32;
+            }*/
+            for (int i = 0; i < graph.length-1; i++) {
+                count += 32;
+                g.vertex(X(count), Y(graphAjustada[graph.length-i-1]));
+            }
         g.endShape();
         pushMatrix();
             rotate(PI);
@@ -150,7 +169,7 @@ public class Member {
 
     private int[] ajustar (int[] graph, int min) {
         int[] graphAjustada = new int[12];
-        // Reducirle el Mínimo valor a todo el Arreglo:
+        // Restarle el Mínimo valor a todo el Arreglo:
             for (int i = 0; i < graph.length; i++) {
                 graphAjustada[i] = graph[i] - min;
             }
