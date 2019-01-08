@@ -9,6 +9,13 @@ Member wol;
     int screenC = 0; // Control de Pantalla
     int memberC = 0; // Control de Miembro
     PImage fondo; // Fondo del Sketch
+    PImage PP0; // Fondo de la Pantalla Principal
+    PImage PP1;
+    PImage PP2;
+    PImage PP3;
+    PImage PP4;
+    PImage PP5;
+    PImage PP6;
 
 void setup(){
     // Configuración del Sketch
@@ -17,6 +24,20 @@ void setup(){
         noStroke();
         fondo = loadImage("/Graphic/Fondo.png");
         fondo.resize(width,height);
+        PP0 = loadImage("/Graphic/PP/PP0.png");
+        PP0.resize(width,height);
+        PP1 = loadImage("/Graphic/PP/PP1.png");
+        PP1.resize(width,height);
+        PP2 = loadImage("/Graphic/PP/PP2.png");
+        PP2.resize(width,height);
+        PP3 = loadImage("/Graphic/PP/PP3.png");
+        PP3.resize(width,height);
+        PP4 = loadImage("/Graphic/PP/PP4.png");
+        PP4.resize(width,height);
+        PP5 = loadImage("/Graphic/PP/PP5.png");
+        PP5.resize(width,height);
+        PP6 = loadImage("/Graphic/PP/PP6.png");
+        PP6.resize(width,height);
     // Inicialización de Objetos (Miembros)
         admin = new Member("Admin");
         senpai = new Member("Senpai");
@@ -42,7 +63,17 @@ void setup(){
 
 void draw(){
     // Dibujo del Fondo
-        image(fondo,0,0);
+        //image(PP0,0,0);
+        switch (screenC){
+            case 0: // Pantalla Principal
+                image(PP0,0,0);
+            break;
+            case 1: // Estadísticas
+                image(fondo,0,0);
+            break;
+            default: // Vacío
+            break;
+        }
     // Pantalla de Selección
         select();
         memberDisplay();
@@ -81,22 +112,22 @@ private void select() {
 
 private void highlight() {
     if (mouseX > 0 && mouseX < width/6){
-        rect(0,0,width/6,height);
+        image(PP1,0,0);
     }else
     if (mouseX > width/6 && mouseX < width*2/6){
-        rect(width/6,0,width/6,height);
+        image(PP2,0,0);
     }else
     if (mouseX > width*2/6 && mouseX < width*3/6){
-        rect(width*2/6,0,width/6,height);
+        image(PP3,0,0);
     }else
     if (mouseX > width*3/6 && mouseX < width*4/6){
-        rect(width*3/6,0,width/6,height);
+        image(PP4,0,0);
     }else
     if (mouseX > width*4/6 && mouseX < width*5/6){
-        rect(width*4/6,0,width/6,height);
+        image(PP5,0,0);
     }else
     if (mouseX > width*5/6 && mouseX < width){
-        rect(width*5/6,0,width/6,height);
+        image(PP6,0,0);
     }
 }
 
