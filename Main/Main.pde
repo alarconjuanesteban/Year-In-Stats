@@ -5,25 +5,33 @@ Member sergay;
 Member niggo;
 Member wol;
 
-// Variables Preinicializadas
+// Declaración y Preinicialización de Variables
+    int alto = 1560 - 54; // Alto Original
+    int ancho = 2773; // Ancho Original
     int screenC = 0; // Control de Pantalla
     int memberC = 0; // Control de Miembro
     PImage fondo; // Fondo del Sketch
+    PImage B0; // Flecha de Vuelta (OFF)
+    PImage B1; // Flecha de Vuelta (ON)
     PImage PP0; // Fondo de la Pantalla Principal
-    PImage PP1;
-    PImage PP2;
-    PImage PP3;
-    PImage PP4;
-    PImage PP5;
-    PImage PP6;
+    PImage PP1; //            .
+    PImage PP2; //            .
+    PImage PP3; //            .
+    PImage PP4; //            .
+    PImage PP5; //            .
+    PImage PP6; // Y sus distintas variantes
 
 void setup(){
     // Configuración del Sketch
         fullScreen();
         shapeMode(CORNER);
         noStroke();
-        fondo = loadImage("/Graphic/Fondo.png");
+        fondo = loadImage("/Graphic/Stats/Fondo.png");
         fondo.resize(width,height);
+        B0 = loadImage("/Graphic/Stats/B0.png");
+        B0.resize(width/21,height/10);
+        B1 = loadImage("/Graphic/Stats/B1.png");
+        B1.resize(width/21,height/10);
         PP0 = loadImage("/Graphic/PP/PP0.png");
         PP0.resize(width,height);
         PP1 = loadImage("/Graphic/PP/PP1.png");
@@ -63,20 +71,64 @@ void setup(){
 
 void draw(){
     // Dibujo del Fondo
-        //image(PP0,0,0);
         switch (screenC){
             case 0: // Pantalla Principal
                 image(PP0,0,0);
             break;
             case 1: // Estadísticas
                 image(fondo,0,0);
-            break;
-            default: // Vacío
+                image(B0, X(20), Y(20));
             break;
         }
-    // Pantalla de Selección
+    // Pantalla Interactiva
         select();
         memberDisplay();
+}
+
+private void select () { // Highlight + Click
+    switch (screenC) {
+        case 0: // Pantalla Principal
+            if (mouseY > 20+height/10 && mouseY < height){
+                if (mouseX > 0 && mouseX < width/6){
+                    image(PP1,0,0);
+                    click(1,1);
+                }else
+                if (mouseX > width/6 && mouseX < width*2/6){
+                    image(PP2,0,0);
+                    click(1,2);
+                }else
+                if (mouseX > width*2/6 && mouseX < width*3/6){
+                    image(PP3,0,0);
+                    click(1,3);
+                }else
+                if (mouseX > width*3/6 && mouseX < width*4/6){
+                    image(PP4,0,0);
+                    click(1,4);
+                }else
+                if (mouseX > width*4/6 && mouseX < width*5/6){
+                    image(PP5,0,0);
+                    click(1,5);
+                }else
+                if (mouseX > width*5/6 && mouseX < width){
+                    image(PP6,0,0);
+                    click(1,6);
+                }
+            }
+        break;
+        case 1: // Estadísticas
+            if (mouseX > X(20) && mouseX < X(20)+width/21 && mouseY > Y(20) && mouseY < Y(20)+height/10){
+                image(B1, X(20), Y(20));
+                click(0,0);
+            }
+        break;
+    }
+}
+
+private void click (int s, int m) {
+    if (mousePressed && mouseButton == LEFT){
+        memberC = m;
+        screenC = s;
+    }
 }
 
 public void memberDisplay() {
@@ -99,58 +151,13 @@ public void memberDisplay() {
         case 6: // WoL! (Totales)
             wol.stats();
         break;
-        default: // Vacío (Sin Display)
-        break;
     }
 }
 
-private void select() {
-    if (screenC == 0)
-        highlight();
-    click();
+public int X (int x) {
+    return width*x/this.ancho;
 }
 
-private void highlight() {
-    if (mouseX > 0 && mouseX < width/6){
-        image(PP1,0,0);
-    }else
-    if (mouseX > width/6 && mouseX < width*2/6){
-        image(PP2,0,0);
-    }else
-    if (mouseX > width*2/6 && mouseX < width*3/6){
-        image(PP3,0,0);
-    }else
-    if (mouseX > width*3/6 && mouseX < width*4/6){
-        image(PP4,0,0);
-    }else
-    if (mouseX > width*4/6 && mouseX < width*5/6){
-        image(PP5,0,0);
-    }else
-    if (mouseX > width*5/6 && mouseX < width){
-        image(PP6,0,0);
-    }
-}
-
-private void click() {
-    if(mousePressed && mouseButton == LEFT && screenC == 0) {
-        if (mouseX > 0 && mouseX < width/6){
-            memberC = 1;
-        }else
-        if (mouseX > width/6 && mouseX < width*2/6){
-            memberC = 2;
-        }else
-        if (mouseX > width*2/6 && mouseX < width*3/6){
-            memberC = 3;
-        }else
-        if (mouseX > width*3/6 && mouseX < width*4/6){
-            memberC = 4;
-        }else
-        if (mouseX > width*4/6 && mouseX < width*5/6){
-            memberC = 5;
-        }else
-        if (mouseX > width*5/6 && mouseX < width){
-            memberC = 6;
-        }
-        screenC = 1;
-    }
+public int Y (int y) {
+    return height*y/this.alto;
 }

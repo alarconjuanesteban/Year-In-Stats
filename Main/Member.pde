@@ -9,8 +9,6 @@ public class Member {
     PFont cambria;
     PFont book;
     PFont bookBold;
-    int alto;
-    int ancho;
     color c;
     int y;
 
@@ -24,8 +22,6 @@ public class Member {
         cambria = createFont("Cambria Italic", 15, true);
         book = createFont("Book Antiqua", 35, true);
         bookBold = createFont("Book Antiqua Bold", 50, true);
-        alto = 1560 - 54;
-        ancho = 2773;
         fill(0);
         if(name == "Admin"){
             c = color(200, 0, 0);
@@ -62,10 +58,6 @@ public class Member {
         // Datos de Mensajes
             int mT = data.getInt(y,0);
             String menTotales = nfc(mT);
-            /*int[] graph = new int[12];
-            for (int i = 0; i < 12 ; i++) {
-                graph[i] = data.getInt(y+1,i);
-            }*/
             float t = data.getFloat(y,1);
             float m = 100-t;
             String texto = nfc(t,2);
@@ -111,14 +103,6 @@ public class Member {
             pie(t);
     }
 
-    private int X (int x) {
-        return width*x/this.ancho;
-    }
-
-    private int Y (int y) {
-        return height*y/this.alto;
-    }
-
     private void graph (int[] graph) {
         int max = max(graph);
         int min = min(graph);
@@ -134,10 +118,6 @@ public class Member {
                 g.vertex(X(count), Y(graphAjustada[i]));
                 count -= 32;
             }
-            /*for (int i = 0; i < graph.length; i++) {
-                g.vertex(X(count), Y(graphAjustada[graph.length-i]));
-                count += 32;
-            }*/
             for (int i = 0; i < graph.length-1; i++) {
                 count += 32;
                 g.vertex(X(count), Y(graphAjustada[graph.length-i-1]));
