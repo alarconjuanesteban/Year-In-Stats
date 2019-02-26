@@ -85,7 +85,7 @@ void draw(){
         memberDisplay();
 }
 
-private void select () { // Highlight + Click
+private void select () { // Highlight (Rollover) + Click
     switch (screenC) {
         case 0: // Pantalla Principal
             if (mouseY > 20+height/10 && mouseY < height){
@@ -124,7 +124,7 @@ private void select () { // Highlight + Click
     }
 }
 
-private void click (int s, int m) {
+private void click (int s, int m) { // Controlador de Pantallas Post-Click
     if (mousePressed && mouseButton == LEFT){
         memberC = m;
         screenC = s;
@@ -154,10 +154,11 @@ public void memberDisplay() {
     }
 }
 
-public int X (int x) {
-    return width*x/this.ancho;
-}
+// Ajustes de Coordenadas (Illustrator --> Sketch Dinámico)
+    public int X (int x) {
+        return width*x/this.ancho;
+    }
 
-public int Y (int y) {
-    return height*y/this.alto;
-}
+    public int Y (int y) {
+        return height*y/this.alto;
+    }
