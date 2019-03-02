@@ -12,9 +12,9 @@ public class Member {
     color c;
     int y;
 
-    public Member (String name) {
+    public Member (String name, int year) {
         plantilla = loadImage("/Graphic/"+ name +".png");
-        data = loadTable("/data.csv");
+        data = loadTable("/Data/"+ year +".csv");
         graph = new int[12];
         g = createShape();
         consolas = createFont("Consolas Bold", 12, true);

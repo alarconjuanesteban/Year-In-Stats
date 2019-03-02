@@ -6,6 +6,7 @@ Member niggo;
 Member wol;
 
 // Declaración y Preinicialización de Variables
+    int year = 2019; // Año a Evaluar
     int alto = 1560 - 54; // Alto Original
     int ancho = 2773; // Ancho Original
     int screenC = 0; // Control de Pantalla
@@ -47,12 +48,12 @@ void setup(){
         PP6 = loadImage("/Graphic/PP/PP6.png");
         PP6.resize(width,height);
     // Inicialización de Objetos (Miembros)
-        admin = new Member("Admin");
-        senpai = new Member("Senpai");
-        tejon = new Member("Tejón");
-        sergay = new Member("Sergäy");
-        niggo = new Member("Niggo");
-        wol = new Member("WoL!");
+        admin = new Member("Admin", year);
+        senpai = new Member("Senpai", year);
+        tejon = new Member("Tejón", year);
+        sergay = new Member("Sergäy", year);
+        niggo = new Member("Niggo", year);
+        wol = new Member("WoL!", year);
     // Proyección de Estadísticas
         //admin.stats();
         //senpai.stats();
