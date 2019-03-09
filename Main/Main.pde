@@ -54,13 +54,6 @@ void setup(){
         sergay = new Member("Sergay", year);
         niggo = new Member("Niggo", year);
         wol = new Member("WoL!", year);
-    // Proyección de Estadísticas
-        //admin.stats();
-        //senpai.stats();
-        //tejon.stats();
-        //sergay.stats();
-        //niggo.stats();
-        //wol.stats();
     // Carga de Datos al Arreglo de la Gráfica
         admin.graphLoad();
         senpai.graphLoad();
