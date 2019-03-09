@@ -49,6 +49,21 @@ public class Member {
         }
     }
 
+    public void graphLoad() {
+        graphArray();
+        g.beginShape();
+            g.stroke(c);
+            g.strokeWeight(2);
+            g.noFill();
+            int count = 0;
+            int[] graphAjustada = ajustar(graph, min(graph));
+            for (int i = 0; i < graph.length; i++) {
+                g.vertex(X(count), Y(graphAjustada[i]));
+                count -= 32;
+            }
+        g.endShape();
+    }
+
     public void graphArray() {
         for (int i = 0; i < 12 ; i++)
             graph[i] = data.getInt(y+1,i);
@@ -108,21 +123,6 @@ public class Member {
         int min = min(graph);
         limit(max, min);
         mean(graph);
-        g.beginShape();
-            g.stroke(c);
-            g.strokeWeight(2);
-            g.noFill();
-            int count = 0;
-            int[] graphAjustada = ajustar(graph, min);
-            for (int i = 0; i < graph.length; i++) {
-                g.vertex(X(count), Y(graphAjustada[i]));
-                count -= 32;
-            }
-            for (int i = 0; i < graph.length-1; i++) {
-                count += 32;
-                g.vertex(X(count), Y(graphAjustada[graph.length-i-1]));
-            }
-        g.endShape();
         pushMatrix();
             rotate(PI);
             shape(g, X(-520), Y(-534));

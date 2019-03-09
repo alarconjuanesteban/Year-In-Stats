@@ -6,7 +6,7 @@ Member niggo;
 Member wol;
 
 // Declaración y Preinicialización de Variables
-    int year = 2019; // Año a Evaluar
+    int year = 2018; // Año a Evaluar
     int alto = 1560 - 54; // Alto Original
     int ancho = 2773; // Ancho Original
     int screenC = 0; // Control de Pantalla
@@ -62,12 +62,12 @@ void setup(){
         //niggo.stats();
         //wol.stats();
     // Carga de Datos al Arreglo de la Gráfica
-        admin.graphArray();
-        senpai.graphArray();
-        tejon.graphArray();
-        sergay.graphArray();
-        niggo.graphArray();
-        wol.graphArray();
+        admin.graphLoad();
+        senpai.graphLoad();
+        tejon.graphLoad();
+        sergay.graphLoad();
+        niggo.graphLoad();
+        wol.graphLoad();
 }
 
 void draw(){
