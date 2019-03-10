@@ -48,19 +48,27 @@ void setup(){
         PP6 = loadImage("/Graphic/PP/PP6.png");
         PP6.resize(width,height);
     // Inicialización de Objetos (Miembros)
-        admin = new Member("Admin", year);
-        senpai = new Member("Senpai", year);
-        tejon = new Member("Tejon", year);
-        sergay = new Member("Sergay", year);
-        niggo = new Member("Niggo", year);
-        wol = new Member("WoL!", year);
+        loadMembers(year);
     // Carga de Datos al Arreglo de la Gráfica
-        admin.graphLoad();
-        senpai.graphLoad();
-        tejon.graphLoad();
-        sergay.graphLoad();
-        niggo.graphLoad();
-        wol.graphLoad();
+        loadGraphs();
+}
+
+public void loadMembers (int y) {
+    admin = new Member("Admin", y);
+    senpai = new Member("Senpai", y);
+    tejon = new Member("Tejon", y);
+    sergay = new Member("Sergay", y);
+    niggo = new Member("Niggo", y);
+    wol = new Member("WoL!", y);
+}
+
+public void loadGraphs() {
+    admin.graphLoad();
+    senpai.graphLoad();
+    tejon.graphLoad();
+    sergay.graphLoad();
+    niggo.graphLoad();
+    wol.graphLoad();
 }
 
 void draw(){
@@ -72,11 +80,22 @@ void draw(){
             case 1: // Estadísticas
                 image(fondo,0,0);
                 image(B0, X(20), Y(20));
+                usedYear();
             break;
         }
     // Pantalla Interactiva
         select();
         memberDisplay();
+}
+
+public void usedYear() {
+    if (screenC == 1){
+        pushStyle();
+            rectMode(CENTER);
+            fill(255);
+            text(this.year, width-100, height-100);
+        popStyle();
+    }
 }
 
 private void select () { // Highlight (Rollover) + Click
@@ -118,7 +137,7 @@ private void select () { // Highlight (Rollover) + Click
     }
 }
 
-private void click (int s, int m) { // Controlador de Pantallas Post-Click
+private void click (int s, int m) { // Monitor de Clicks - Controlador de Pantallas
     if (mousePressed && mouseButton == LEFT){
         memberC = m;
         screenC = s;
@@ -145,6 +164,23 @@ public void memberDisplay() {
         case 6: // WoL! (Totales)
             wol.stats();
         break;
+    }
+}
+
+public void keyReleased() {
+    if(screenC == 1 && key == CODED) {
+        // Año++
+            if (keyCode == RIGHT && this.year < 2019){
+                this.year++;
+                loadMembers(this.year);
+                loadGraphs();
+            }
+        // Año--
+            if (keyCode == LEFT && this.year > 2018){
+                this.year--;
+                loadMembers(this.year);
+                loadGraphs();
+            }
     }
 }
 
