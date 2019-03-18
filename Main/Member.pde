@@ -8,6 +8,7 @@ public class Member {
     PFont gabriola;
     PFont cambria;
     PFont book;
+    PFont bookItalics;
     PFont bookBold;
     color c;
     int y;
@@ -17,10 +18,11 @@ public class Member {
         data = loadTable("/Data/"+ year +".csv");
         graph = new int[12];
         g = createShape();
-        consolas = createFont("Consolas Bold", 12, true);
+        consolas = createFont("Consolas Bold", 15, true);
         gabriola = createFont("Gabriola", 20, true);
-        cambria = createFont("Cambria Italic", 15, true);
+        cambria = createFont("Cambria Italic", 20, true);
         book = createFont("Book Antiqua", 35, true);
+        bookItalics = createFont("Book Antiqua Italic", 35, true);
         bookBold = createFont("Book Antiqua Bold", 50, true);
         fill(0);
         if(name == "Admin"){
@@ -59,7 +61,7 @@ public class Member {
             int[] graphAjustada = ajustar(graph, min(graph));
             for (int i = 0; i < graph.length; i++) {
                 g.vertex(X(count), Y(graphAjustada[i]));
-                count -= 32;
+                count -= 50;
             }
         g.endShape();
     }
@@ -78,41 +80,39 @@ public class Member {
             String texto = nfc(t,2);
             String multimedia = nfc(m,2);
             int menDiarios = data.getInt(y,2);
-        //Datos de Actividad
-            int diasActivo = data.getInt(y+2,0);
-            int spamsDebates = data.getInt(y+2,1);
-            int ratioFluidez = data.getInt(y+2,2);
-        stats(menTotales, graph, t, texto, multimedia, menDiarios, diasActivo, spamsDebates, ratioFluidez);
+        //Datos del Año
+            int year = Main.year;
+        stats(menTotales, graph, t, texto, multimedia, menDiarios, year);
     }
 
-    private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int diasActivo, int spamsDebates, int ratioFluidez){
+    private void stats(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios, int year){
         pushMatrix();
-            translate((width-(height*1080/1560))/2,0);
+            translate((width-(height*2773/1560))/2,0);
             drawPlantilla();
             drawMensajes(menTotales, graph, t, texto, multimedia, menDiarios);
-            drawActividad(diasActivo, spamsDebates, ratioFluidez);
+            drawYear(year);
         popMatrix();
     }
 
     private void drawPlantilla() {
         //plantilla.resize(648,936);
         //plantilla.resize(540,780);
-        plantilla.resize(height*1080/1560,height);
+        plantilla.resize(height*2773/1560,height);
         image(plantilla,0,0);
     }
 
     private void drawMensajes(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios) {
         // Mensajes Totales + Diarios En Promedio
             textAlign(CENTER);
-            textFont(bookBold);
-            text(menTotales, X(290), Y(480));
-            textFont(bookBold, 65);
-            text(menDiarios, X(820), Y(722));
+            textFont(bookBold,60);
+            text(menTotales, X(1380), Y(490));
+            textFont(bookBold, 100);
+            text(menDiarios, X(2320), Y(940));
         // Porcentaje de Texto vs. Multimedia
             textAlign(RIGHT);
-            textFont(book);
-            text(texto, X(590), Y(725));
-            text(multimedia, X(590), Y(840));
+            textFont(book,50);
+            text(texto, X(1900), Y(940));
+            text(multimedia, X(1900), Y(1145));
         // Gráficas
             graph(graph);
             pie(t);
@@ -125,7 +125,8 @@ public class Member {
         mean(graph);
         pushMatrix();
             rotate(PI);
-            shape(g, X(-520), Y(-534));
+            // shape(g, X(-520), Y(-534));
+            shape(g, X(-1800), Y(-594));
         popMatrix();
     }
 
@@ -156,7 +157,7 @@ public class Member {
         // Ajuste Porcentual:
             int maxTemp = max(graphAjustada);
             for (int i = 0; i < graphAjustada.length; i++) {
-                graphAjustada[i] = (graphAjustada[i]*100)/maxTemp;
+                graphAjustada[i] = (graphAjustada[i]*175)/maxTemp;
             }
         return graphAjustada;
     }
@@ -164,8 +165,8 @@ public class Member {
     private void limit(int max, int min) {
         textAlign(CENTER);
         textFont(consolas);
-        text(max, X(480), Y(430));
-        text(min, X(480), Y(553));
+        text(max, X(1710), Y(410));
+        text(min, X(1710), Y(630));
     }
 
     private void mean(int[] graph) {
@@ -178,7 +179,7 @@ public class Member {
             textFont(cambria);
             textAlign(CENTER);
             fill(200);
-            text("Media: " + m, X(680), Y(565));
+            text("Media: " + m, X(2060), Y(650));
         popStyle();
     }
 
@@ -187,18 +188,19 @@ public class Member {
             fill(c, 150);
             noStroke();
             float tRadial = (t*360)/100;
-            float radio = width*9.1/100;
-            arc(X(290), Y(745), radio, radio, 0, radians(tRadial));
+            float radio = width*15.7/100;
+            arc(X(1378), Y(973), radio, radio, 0, radians(tRadial));
             //arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
         popStyle();
     }
 
-    private void drawActividad(int diasActivo, int spamsDebates, int ratioFluidez) {
+    private void drawYear(int year) {
         textAlign(CENTER);
-        textFont(bookBold, 50);
-        text(diasActivo, X(250), Y(1215));
-        text(spamsDebates, X(540), Y(1215));
-        text(ratioFluidez, X(830), Y(1215));
+        textFont(bookItalics);
+        pushStyle();
+            fill(c);
+            text(year, X(2340), Y(1290));
+        popStyle();
     }
 
     public int getX(int i){
