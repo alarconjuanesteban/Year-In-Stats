@@ -138,7 +138,7 @@ private void select () { // Highlight (Rollover) + Click
 }
 
 private void click (int s, int m) { // Monitor de Clicks - Controlador de Pantallas
-    if (mousePressed && mouseButton == LEFT){
+    if (mousePressed /*&& mouseButton == LEFT*/){
         memberC = m;
         screenC = s;
     }
