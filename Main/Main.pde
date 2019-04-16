@@ -6,9 +6,9 @@ Member niggo;
 Member wol;
 
 // Declaración y Preinicialización de Variables
-    int year = 2018; // Año a Evaluar
-    int alto = 1560 - 54; // Alto Original
-    int ancho = 2773; // Ancho Original
+    public static int year = 2018; // Año a Evaluar
+    int alto = 1560 - 27; // Alto Original
+    int ancho = 2773 + 15; // Ancho Original
     int screenC = 0; // Control de Pantalla
     int memberC = 0; // Control de Miembro
     PImage fondo; // Fondo del Sketch
@@ -80,22 +80,11 @@ void draw(){
             case 1: // Estadísticas
                 image(fondo,0,0);
                 image(B0, X(20), Y(20));
-                usedYear();
             break;
         }
     // Pantalla Interactiva
         select();
         memberDisplay();
-}
-
-public void usedYear() {
-    if (screenC == 1){
-        pushStyle();
-            rectMode(CENTER);
-            fill(255);
-            text(this.year, width-100, height-100);
-        popStyle();
-    }
 }
 
 private void select () { // Highlight (Rollover) + Click
