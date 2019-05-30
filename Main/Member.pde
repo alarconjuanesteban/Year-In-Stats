@@ -22,7 +22,7 @@ public class Member {
         gabriola = createFont("Gabriola", 20, true);
         cambria = createFont("Cambria Italic", 20, true);
         book = createFont("Book Antiqua", 35, true);
-        bookItalics = createFont("Book Antiqua Italic", 35, true);
+        bookItalics = createFont("Book Antiqua Italic", 50, true);
         bookBold = createFont("Book Antiqua Bold", 50, true);
         fill(0);
         if(name == "Admin"){
@@ -104,15 +104,15 @@ public class Member {
     private void drawMensajes(String menTotales, int[] graph, float t, String texto, String multimedia, int menDiarios) {
         // Mensajes Totales + Diarios En Promedio
             textAlign(CENTER);
-            textFont(bookBold,60);
+            textFont(bookBold,80);
             text(menTotales, X(1380), Y(490));
             textFont(bookBold, 100);
             text(menDiarios, X(2320), Y(940));
         // Porcentaje de Texto vs. Multimedia
             textAlign(RIGHT);
             textFont(book,50);
-            text(texto, X(1900), Y(940));
-            text(multimedia, X(1900), Y(1145));
+            text(texto, X(1900), Y(930));
+            text(multimedia, X(1900), Y(1135));
         // Gráficas
             graph(graph);
             pie(t);
@@ -189,7 +189,7 @@ public class Member {
             noStroke();
             float tRadial = (t*360)/100;
             float radio = width*15.7/100;
-            arc(X(1378), Y(973), radio, radio, 0, radians(tRadial));
+            arc(X(1380), Y(973), radio, radio, 0, radians(tRadial));
             //arc(X(290), Y(745), 125, 125, 0, radians(tRadial));
         popStyle();
     }
