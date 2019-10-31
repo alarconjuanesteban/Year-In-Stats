@@ -29,8 +29,8 @@ public class Member {
             c = color(200, 0, 0);
             y = 1;
         }
-        if(name == "Senpai"){
-            c = color(0, 200, 100);
+        if(name == "Niggo"){
+            c = color(255, 150, 0);
             y = 5;
         }
         if(name == "Tejon"){
@@ -41,13 +41,29 @@ public class Member {
             c = color(0, 100, 255);
             y = 13;
         }
-        if(name == "Niggo"){
-            c = color(255, 150, 0);
+        if(name == "Senpai"){
+            c = color(0, 200, 100);
             y = 17;
+        }
+        if(name == "Bosboni"){
+            c = color(200, 255, 0);
+            y = 21;
+        }
+        if(name == "Cohete"){
+            c = color(100, 200, 200);
+            y = 25;
+        }
+        if(name == "Karen"){
+            c = color(150, 0, 75);
+            y = 29;
+        }
+        if(name == "Santy"){
+            c = color(255, 190, 160);
+            y = 33;
         }
         if(name == "WoL!"){
             c = color(0, 0, 0);
-            y = 21;
+            y = 37;
         }
     }
 
