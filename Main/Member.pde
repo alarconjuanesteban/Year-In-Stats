@@ -46,7 +46,7 @@ public class Member {
             y = 17;
         }
         if(name == "Bosboni"){
-            c = color(200, 255, 0);
+            c = color(150, 175, 0);
             y = 21;
         }
         if(name == "Cohete"){
@@ -58,7 +58,7 @@ public class Member {
             y = 29;
         }
         if(name == "Santy"){
-            c = color(255, 190, 160);
+            c = color(200, 140, 120);
             y = 33;
         }
         if(name == "WoL!"){
