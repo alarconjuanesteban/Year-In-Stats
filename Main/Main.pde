@@ -211,7 +211,7 @@ public void memberDisplay() {
 public void keyReleased() {
     if(screenC == 1 && key == CODED) {
         // Año++
-            if (keyCode == RIGHT && this.year < 2019){
+            if (keyCode == RIGHT && this.year < 2020){
                 this.year++;
                 loadMembers(this.year);
                 loadGraphs();
