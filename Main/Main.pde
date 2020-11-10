@@ -10,7 +10,7 @@ Member santy;
 Member wol;
 
 // Declaración y Preinicialización de Variables
-    public static int year = 2018; // Año a Evaluar
+    public static int year = 2020; // Año a Evaluar
     int alto = 1560 - 27; // Alto Original
     int ancho = 2773 + 15; // Ancho Original
     int screenC = 0; // Control de Pantalla
